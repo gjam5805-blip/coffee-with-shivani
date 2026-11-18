@@ -117,7 +117,11 @@ section{padding:100px 0}
 .wall-row{display:flex;gap:14px;width:max-content;animation:marquee 60s linear infinite}
 .wall-row.rev{animation-direction:reverse;animation-duration:70s}
 .wall:hover .wall-row{animation-play-state:paused}
-.wall-row a{flex:none;width:300px;height:169px;border-radius:14px;overflow:hidden;background:var(--sand)}
+.wall-row a{flex:none;position:relative;width:300px;height:169px;border-radius:14px;overflow:hidden;background:var(--sand)}
+.wall-row .play{width:48px;height:48px}.wall-row .play svg{width:17px;margin-left:3px}
+.wall-row a.v .play{width:40px;height:40px}.wall-row a.v .play svg{width:14px}
+.wall-row a:hover .play,.vcard:hover .play{transform:scale(1.12)}
+.vcard .play{width:54px;height:54px}.vcard .play svg{width:19px;margin-left:4px}
 .wall-row a.v{width:150px}
 .wall-row img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
 .wall-row a:hover img{transform:scale(1.06)}
@@ -556,14 +560,15 @@ const SHORTS=[
   ['Yehot7oHmtE','1K views','Garba','Garba with my sakhi'],
   ['9HMbXchGC94','320 views','Podcast clip','Did Draupadi really cause the Mahabharata war?'],
   ['zAFp8MzmLPs','105 views','Podcast clip','From Indian immigrant to Australian real estate']];
-const tile=(id,short)=>`<a class="${short?'v':''}" href="https://www.youtube.com/${short?'shorts/':'watch?v='}${id}" target="_blank" rel="noopener" tabindex="-1"><img src="assets/thumbs/${short?'s_':''}${id}.webp" alt="" loading="lazy"></a>`;
+const PLAY='<div class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3l16 9-16 9z"/></svg></div>';
+const tile=(id,short)=>`<a class="${short?'v':''}" href="https://www.youtube.com/${short?'shorts/':'watch?v='}${id}" target="_blank" rel="noopener" tabindex="-1"><img src="assets/thumbs/${short?'s_':''}${id}.webp" alt="" loading="lazy">${PLAY}</a>`;
 const rowA=[...LONG.slice(0,4).map(i=>tile(i)),...SHORTS.slice(0,3).map(s=>tile(s[0],1)),...LONG.slice(4).map(i=>tile(i))].join('');
 const rowB=[...SHORTS.slice(3).map(s=>tile(s[0],1)),...LONG.slice().reverse().map(i=>tile(i))].join('');
 document.getElementById('wallA').innerHTML=rowA+rowA;
 document.getElementById('wallB').innerHTML=rowB+rowB;
 
 // popular shorts carousel
-document.getElementById('shortsRow').innerHTML=SHORTS.map(([id,v,tag,t])=>`<a class="vcard" href="https://www.youtube.com/shorts/${id}" target="_blank" rel="noopener"><div class="thumb"><img src="assets/thumbs/s_${id}.webp" alt="" loading="lazy"><span class="views">${v}</span></div><div class="txt"><span class="tag">${tag}</span><h4>${t}</h4></div></a>`).join('');
+document.getElementById('shortsRow').innerHTML=SHORTS.map(([id,v,tag,t])=>`<a class="vcard" href="https://www.youtube.com/shorts/${id}" target="_blank" rel="noopener"><div class="thumb"><img src="assets/thumbs/s_${id}.webp" alt="" loading="lazy">${PLAY}<span class="views">${v}</span></div><div class="txt"><span class="tag">${tag}</span><h4>${t}</h4></div></a>`).join('');
 const row=document.getElementById('shortsRow');
 document.getElementById('prevS').onclick=()=>row.scrollBy({left:-540,behavior:'smooth'});
 document.getElementById('nextS').onclick=()=>row.scrollBy({left:540,behavior:'smooth'});
