@@ -556,8 +556,8 @@ const SHORTS=[
   ['5riOqllodjQ','1.2K views','Kailash Mansarovar','At 15,000 feet, even the wind chants Om Namah Shivaya'],
   ['kapB_M26rcs','1.2K views','Gujarati culture','Who knew saying "NO" could sound this sweet?'],
   ['Yehot7oHmtE','1K views','Garba','Garba with my sakhi'],
-  ['9HMbXchGC94','320 views','Podcast clip','Did Draupadi really cause the Mahabharata war?'],
-  ['zAFp8MzmLPs','105 views','Podcast clip','From Indian immigrant to Australian real estate']];
+  ['juXBvb6UPVM','780 views','Faith','The secret to a peaceful life: trust God, let go'],
+  ['9HMbXchGC94','320 views','Podcast clip','Did Draupadi really cause the Mahabharata war?']];
 const PLAY='<div class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3l16 9-16 9z"/></svg></div>';
 const tile=(id,short)=>`<a class="${short?'v':''}" href="https://www.youtube.com/${short?'shorts/':'watch?v='}${id}" target="_blank" rel="noopener" tabindex="-1"><img src="assets/thumbs/${short?'s_':''}${id}.webp" alt="" loading="lazy">${PLAY}</a>`;
 const rowA=[...LONG.slice(0,4).map(i=>tile(i)),...SHORTS.slice(0,3).map(s=>tile(s[0],1)),...LONG.slice(4).map(i=>tile(i))].join('');
